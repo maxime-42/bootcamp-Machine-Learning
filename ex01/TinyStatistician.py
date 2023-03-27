@@ -10,7 +10,9 @@ class TinyStatistician():
         if isinstance(x, list):
            return x.mean(x)
     def median(self, x):
+        """"""
         return np.median(x)
+    
     def quartile(self, x):
         """Compute the 1st and 3rd quartiles of a 1D array using NumPy"""
         q1 = np.percentile(x, 25)
@@ -18,9 +20,11 @@ class TinyStatistician():
         return q1, q3
 
     def  percentile(self, x, p):
+        """"""
         pass
 
     def var(self, x):
+        """"""
         return np.variance(x)
 
     def std(self, x):
