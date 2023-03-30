@@ -1,8 +1,3 @@
-"""Understand and manipulate the notion of gradient and gradient descent in machine learning. 
-You must write a function that computes the gradient of the loss function. It must
-compute a partial derivative with respect to each theta parameter separately, and return
-the vector gradient.
-"""
 import numpy as np
 
 
@@ -31,7 +26,6 @@ def simple_predict(x=np.array([]), theta=np.array([])):
     x_0 = np.ones(len(x))
     return np.column_stack((x_0, x )).dot(theta)
 
-
 def simple_gradient(x, y, theta):
     """
         Computes a gradient vector from three non-empty numpy.array, with a for-loop.
@@ -52,18 +46,20 @@ def simple_gradient(x, y, theta):
     if check_requirement_args(x, y, theta) is False:
         return None
     y_hat = simple_predict(x, theta)
-    if y_hat is None:
-        return None
+
+    x_0 = np.ones(5)
+    xp = np.column_stack((x_0, x ))
+    
     m = len(x)
-    result = np.zeros(2)
-    for i in range(m):
-        result[0] += y_hat[i] - y[i]
-        result[1] += (y_hat[i] - y[i]) * x[i]
-    return 1/m * result 
+    print(xp.transpose().shape)
+    print( (y_hat - y).shape)
+    r =  xp.transpose().dot((y_hat - y))
+    return (1/m) * r
 
-x = np.array([12.4956442, 21.5007972, 31.5527382, 48.9145838, 57.5088733]).reshape((-1, 1) )
+x = np.array([12.4956442, 21.5007972, 31.5527382, 48.9145838, 57.5088733]).reshape((-1, 1))
 y = np.array([37.4013816, 36.1473236, 45.7655287, 46.6793434, 59.5585554]).reshape((-1, 1))
-
+# Example 0:
 
 theta1 = np.array([2, 0.7]).reshape((-1, 1))
+
 print(simple_gradient(x, y, theta1))
