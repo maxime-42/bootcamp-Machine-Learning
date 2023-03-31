@@ -14,9 +14,10 @@ def simple_predict(x_1=np.array([]), theta=np.array([])):
     Raises:
     This function should not raise any Exception.
     """
-    if x_1.ndim != 1 or theta.shape != (2,):
+
+    if x_1.size == 0 or theta.size == 0:
         return None
-    x_0 = np.ones(5)
+    x_0 = np.ones(len(x_1))
     x = np.column_stack((x_0, x_1 ))
     return x.dot(theta)
 

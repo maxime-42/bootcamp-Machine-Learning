@@ -72,6 +72,7 @@ def r2score_(y:np.ndarray, y_hat:np.ndarray):
     denomitor = (y - y_bar)**2
     return 1 - (np.sum(numerator)/np.sum(denomitor))
 
+
 x = np.array([0, 15, -9, 7, 12, 3, -21])
 y = np.array([2, 14, -13, 5, 12, 4, -19])
 # Mean squared error
