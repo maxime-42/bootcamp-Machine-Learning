@@ -10,12 +10,19 @@ data = pd.read_csv("abc.csv")
 Xpill = np.array(data["Micrograms"]).reshape(-1,1)
 Yscore = np.array(data["Score"]).reshape(-1,1)
 
-print(data)
+# print(data)
+
 linear_model1 = MyLR(np.array([[89.0], [-8]]))
 linear_model2 = MyLR(np.array([[89.0], [-6]]))
+
+
 Y_model1 = linear_model1.predict_(Xpill)
+print(Y_model1)
 Y_model2 = linear_model2.predict_(Xpill)
-print(MyLR.mse_(Yscore, Y_model1))
+# print(MyLR.mse_(Yscore, Y_model1))
+
+MyLR.mse_(Yscore, Y_model1)
+
 # 57.60304285714282
 # print(mean_squared_error(Yscore, Y_model1))
 # # 57.603042857142825
