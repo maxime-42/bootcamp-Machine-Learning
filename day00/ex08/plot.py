@@ -2,25 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from loss import loss_  
-def simple_predict(x_1:np.ndarray, theta:np.ndarray):
-    """
-    Computes the vector of prediction y_hat from two non-empty numpy.ndarray.
-    Args:
-        x: has to be an numpy.ndarray, a vector of dimension m * 1.
-        theta: has to be an numpy.ndarray, a vector of dimension 2 * 1.
-    Returns:
-        y_hat as a numpy.ndarray, a vector of dimension m * 1.
-        None if x or theta are empty numpy.ndarray.
-        None if x or theta dimensions are not appropriate.
-    Raises:
-    This function should not raise any Exception.
-    """
-    if x_1.size == 0 or theta.size == 0:
-        return None
-    x_0 = np.ones(len(x_1))
-    x = np.column_stack((x_0, x_1 ))
-    return x.dot(theta)
+from day00.ex02.prediction import simple_predict 
 
 def plot_with_loss(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
     """
@@ -35,12 +17,13 @@ def plot_with_loss(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
         This function should not raise any Exceptions.
     """
     model = simple_predict(x, theta)
+    print("model= ", model)
     if model is None:
         return None
     plt.plot(x, model, color='r')
-    print(f"x = {x}")
-    print(f"model = {model}")
-    print(f"y = {y}")
+    # print(f"x = {x}")
+    # print(f"model = {model}")
+    # print(f"y = {y}")
 
     plt.scatter(x, y)
     coef = np.polyfit(x, model, 1)
