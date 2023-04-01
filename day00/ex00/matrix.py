@@ -2,8 +2,10 @@
 
 class Matrix():
     """
-        mplement all the following built-in functions (called magic/special methods) 
-        for your Matrix class
+    Manipulation and understanding of basic matrix operations.
+    In this exercise, you have to create a Matrix and a Vector class. The goal is to have ma-
+    trices and be able to perform both matrix-matrix operation and matrix-vector operations
+    with them
     """
     def __init__(self, data = list[list[int]]):
         try:

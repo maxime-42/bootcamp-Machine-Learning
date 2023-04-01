@@ -5,8 +5,7 @@ class TinyStatistician():
     """
         Create a class named TinyStatistician with the following methods.
         All methods take a list or a numpy.array as first parameter. 
-        You have to protect your
-        functions against input errors
+        functions have to protect against input errors
     """
     def __init__(self) -> None:
         pass
@@ -30,6 +29,8 @@ class TinyStatistician():
         """Compute the 1st and 3rd quartiles of a 1D array using NumPy"""
         if len(x) == 0:
             return None
+        if not all([isinstance(x, np.ndarray),  x.shape in [(x.size, 1)]]):
+            return None
         q1 = np.percentile(x, 25)
         q3 = np.percentile(x, 75)
         return q1, q3
@@ -49,11 +50,15 @@ class TinyStatistician():
          """
         if len(x) == 0:
             return None
+        if not all([isinstance(x, np.ndarray),  x.shape in [(x.size, 1)]]):
+            return None
         return np.percentile(x, p)
 
     def var(self, x:np.ndarray = np.array([])):
         """test"""
         if len(x) == 0:
+            return None
+        if not all([isinstance(x, np.ndarray),  x.shape in [(x.size, 1)]]):
             return None
         return np.var(x)
 

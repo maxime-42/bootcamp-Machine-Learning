@@ -1,7 +1,10 @@
 """import utils module"""
 import numpy as np
 
-def simple_predict(x_1=np.array([]), theta=np.array([])):
+from day00.utils.utils_function import check_x_and_theta 
+
+
+def simple_predict(x=np.array([]), theta=np.array([])):
     """
     Computes the vector of prediction y_hat from two non-empty numpy.ndarray.
     Args:
@@ -14,14 +17,11 @@ def simple_predict(x_1=np.array([]), theta=np.array([])):
     Raises:
     This function should not raise any Exception.
     """
-
-    if x_1.size == 0 or theta.size == 0:
+    if not check_x_and_theta(x, theta):
         return None
-    x_0 = np.ones(len(x_1))
-    x = np.column_stack((x_0, x_1 ))
-    return x.dot(theta)
 
-x = np.arange(1,6)
-theta2 = np.array([-3, 1])
-r = simple_predict(x, theta2)
-print(r)
+    x = np.column_stack((np.ones(len(x)), x ))
+   
+    tmp = theta[0] + theta[1] * x
+    y_hat = np.delete(tmp, 0, 1).transpose()
+    return y_hat[0]

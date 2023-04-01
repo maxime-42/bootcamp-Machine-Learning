@@ -1,6 +1,7 @@
 """import utils module"""
 import numpy as np
 import matplotlib.pyplot as plt
+from day00.ex04.prediction import predict_
 
 def simple_predict(x_1:np.ndarray, theta:np.ndarray):
     """
@@ -33,8 +34,10 @@ def plot(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
     Raises:
         This function should not raise any Exceptions.
     """
-    model = simple_predict(x, theta)
-    plt.plot(x, model)
+
+    y_hat = predict_(x, theta)
+    
+    plt.plot(x, y_hat)
     plt.scatter(x, y)
 
     plt.show()
