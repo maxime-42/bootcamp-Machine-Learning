@@ -20,7 +20,9 @@ class MyLinearRegression():
 
     def predict_(self, x, y):
         simple_predict(x, y)
-    
+
+    def predict_(self, x):
+        return simple_predict(x, self.thetas)
 
     def loss_elem_(self, y:np.ndarray, y_hat:np.ndarray):
         """
@@ -37,7 +39,7 @@ class MyLinearRegression():
             This function should not raise any Exception.
         """
 
-        if  all(isinstance(obj, np.ndarray) and obj.shape in [(obj.size, 1)] for  obj in [x, y]) is False : 
+        if  all(isinstance(obj, np.ndarray) and obj.shape in [(obj.size, 1)] for  obj in [y, y_hat]) is False : 
             return None
         if y_hat.shape != y.shape:
             return None
@@ -59,12 +61,12 @@ class MyLinearRegression():
             This function should not raise any Exception.
         """
 
-        if  all(isinstance(obj, np.ndarray) and obj.shape in [(obj.size, 1)] for  obj in [x, y]) is False : 
+        if  all(isinstance(obj, np.ndarray) and obj.shape in [(obj.size, 1)] for  obj in [y, y_hat]) is False : 
             return None
         squared_distances  = loss_elem_(y, y_hat)
         divizer = 2*len(y)
         return (1/divizer) * np.sum(squared_distances)
-    
+    @classmethod
     def mse_(self, y:np.ndarray, y_hat:np.ndarray):
         """
             Description:
