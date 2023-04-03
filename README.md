@@ -16,11 +16,11 @@ in progress<br>
 
 <br>
 
-## EX03
+### EX03
 [SKLEARNLinearRegression ](https://www.youtube.com/watch?v=P6kSc3qVph0&t=605s)
 <br>
 
-## Ex05 and Ex6
+### Ex05 and Ex6
 [intro to Standardization vs Normalization](https://www.youtube.com/watch?v=mnKm3YP56PY&t=301s)
 <br>
 
@@ -28,5 +28,6 @@ in progress<br>
 [Part Two ](https://www.youtube.com/watch?v=2tuBREK_mgE)
 
 <br>
+
 [Standardization vs Normalization Clearly Explained!](https://www.youtube.com/watch?v=sxEqtjLC0aM)
 
