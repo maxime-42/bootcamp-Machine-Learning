@@ -27,4 +27,4 @@ def gradient(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
     y_hat = predict_(x, theta)
     m = len(x)
     x = add_intercept(x)
-    return x.T.dot(y_hat - y) / m
+    return x.T.dot(y_hat - y) * 1/m

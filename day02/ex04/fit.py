@@ -23,6 +23,7 @@ def fit_(x:np.ndarray, y:np.ndarray, theta:np.ndarray, alpha:float, max_iter:int
     Raises:
         This function should not raise any Exception.
     """
-    for i in range(max_iter):
-        theta = theta - (alpha *  grad(x, y, theta))
+    for _ in range(max_iter):
+        derive = alpha *  grad(x, y, theta)
+        theta = theta - derive
     return theta

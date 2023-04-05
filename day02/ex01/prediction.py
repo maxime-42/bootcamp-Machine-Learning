@@ -18,6 +18,6 @@ def predict_(x:np.ndarray, theta:np.ndarray):
         return None
     
     x = add_intercept(x)
-    y_hat = x.dot(theta)
+    # y_hat = x.dot(theta)
     # print(f"{y_hat}\n")
-    return y_hat
+    return x.dot(theta)

@@ -23,7 +23,6 @@ def fit_(x:np.ndarray, y:np.ndarray, theta:np.ndarray, alpha:float, max_iter:flo
     """
     if check_requirement_args(x, y, theta) is False: 
         return None
-    derive = np.ones(2)
     for i in range(max_iter):
         derive = gradient(x, y, theta)
         theta = theta - alpha * derive
