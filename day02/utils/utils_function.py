@@ -10,11 +10,11 @@ def check_x_and_theta(x:np.ndarray, theta:np.ndarray = np.array([[]])):
         True if the requirement is fine
         False it mean there are some error in args
     """
-    return True
+
     return isinstance(x, np.ndarray) and isinstance(theta, np.ndarray) and x.ndim == 2 and theta.ndim == 2 and x.shape[1] == theta.shape[0] - 1
     # return isinstance(x, np.ndarray) and isinstance(theta, np.ndarray) and x.ndim == 2 and theta.ndim == 2 and x.shape[1] == theta.shape[0] - 1
 
-def add_intercept(x=np.array([])):
+def add_intercept(x=np.ndarray):
     """Adds a column of 1’s to the non-empty numpy.array x.
     Args:
         x: has to be a numpy.array of dimension m * n.
@@ -30,4 +30,3 @@ def add_intercept(x=np.array([])):
     if len(x.shape) == 1:
         x = x.reshape(-1, 1)
     return np.column_stack((np.ones(len(x)), x ))
-

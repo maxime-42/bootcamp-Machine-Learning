@@ -8,23 +8,19 @@ class MyLinearRegression():
         Description:
         My personnal linear regression class to fit like a boss.
     """
-    def __init__(self, theta:np.ndarray, alpha=0.001, max_iter=1000):
+    def __init__(self, theta:np.ndarray, alpha=0.0000001, max_iter=100_000):
         self.alpha = alpha
         self.max_iter = max_iter
-        self.theta = theta
-        #... other methods ...
-        # gradient()
+        self.thetas = theta
+
     def fit_(self, x, y):
         """call fit function"""
-        # print("befor = ", self.theta)
-        self.theta = i_fit_(x, y, self.theta, self.alpha, self.max_iter )
-        # print("after = ", self.theta)
+        self.thetas = i_fit_(x, y, self.thetas, self.alpha, self.max_iter )
 
 
     def predict_(self, x):
         """prediction"""
-        print("new theta = ", self.theta)
-        return simple_predict(x, self.theta)
+        return simple_predict(x, self.thetas    )
 
     def loss_elem_(self, y:np.ndarray, y_hat:np.ndarray):
         """
