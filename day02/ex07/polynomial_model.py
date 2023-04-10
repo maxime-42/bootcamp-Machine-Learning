@@ -14,8 +14,11 @@ def add_polynomial_features(x:np.ndarray, power:int):
         Raises:
             This function should not raise any Exception.
     """
+    # print(f"type x == {type(x)}")
+    
     if isinstance(x, np.ndarray) is False or x.shape == (x.size, 1) is False:
         return None
+    # print("helloo")
     matrix = [x**j for j in range(1, power+1)]
     return np.column_stack(matrix)
 

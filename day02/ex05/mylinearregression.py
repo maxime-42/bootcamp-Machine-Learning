@@ -13,14 +13,15 @@ class MyLinearRegression():
         self.max_iter = max_iter
         self.thetas = theta
 
-    def fit_(self, x, y):
+
+    def fit_(self, x:np.ndarray, y:np.ndarray):
         """call fit function"""
         self.thetas = i_fit_(x, y, self.thetas, self.alpha, self.max_iter )
 
 
     def predict_(self, x):
         """prediction"""
-        return simple_predict(x, self.thetas    )
+        return simple_predict(x, self.thetas)
 
     def loss_elem_(self, y:np.ndarray, y_hat:np.ndarray):
         """
@@ -78,7 +79,7 @@ class MyLinearRegression():
             Raises:
                 This function should not raise any Exceptions.
         """
-        if y_hat.shape != y.shape:
-            return None
+        # if y_hat.shape != y.shape:
+        #     return None
         square = (y_hat - y)**2
         return (1/len(y)) * np.sum(square) 

@@ -10,9 +10,8 @@ def check_x_and_theta(x:np.ndarray, theta:np.ndarray = np.array([[]])):
         True if the requirement is fine
         False it mean there are some error in args
     """
-
     return isinstance(x, np.ndarray) and isinstance(theta, np.ndarray) and x.ndim == 2 and theta.ndim == 2 and x.shape[1] == theta.shape[0] - 1
-    # return isinstance(x, np.ndarray) and isinstance(theta, np.ndarray) and x.ndim == 2 and theta.ndim == 2 and x.shape[1] == theta.shape[0] - 1
+    # return isinstan	ce(x, np.ndarray) and isinstance(theta, np.ndarray) and x.ndim == 2 and theta.ndim == 2 and x.shape[1] == theta.shape[0] - 1
 
 def add_intercept(x=np.ndarray):
     """Adds a column of 1’s to the non-empty numpy.array x.

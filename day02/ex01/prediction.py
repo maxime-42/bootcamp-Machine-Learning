@@ -15,9 +15,12 @@ def predict_(x:np.ndarray, theta:np.ndarray):
         This function should not raise any Exception.
     """
     if check_x_and_theta(x, theta) is False:
+        # print("")
+        print(f"x.shape: {x.shape} | theta.shape: {theta.shape}")
         return None
-    
     x = add_intercept(x)
+    # print(x)
     # y_hat = x.dot(theta)
     # print(f"{y_hat}\n")
+    # print("prediit == ", x.dot(theta))
     return x.dot(theta)

@@ -3,7 +3,7 @@ import numpy as np
 from  day02.ex03.gradient import gradient as grad
 
 
-def fit_(x:np.ndarray, y:np.ndarray, theta:np.ndarray, alpha:float, max_iter:int):
+def fit_(x:np.ndarray, y:np.ndarray, theta:np.ndarray, alpha:float, max_iter:int=10000):
     """
     Description:
         Fits the model to the training dataset contained in x and y.
@@ -24,7 +24,6 @@ def fit_(x:np.ndarray, y:np.ndarray, theta:np.ndarray, alpha:float, max_iter:int
         This function should not raise any Exception.
     """
     # print("derive = ", grad(x, y, theta))
-
     for _ in range(max_iter):
         derive = alpha *  grad(x, y, theta)
         theta = theta - derive

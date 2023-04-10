@@ -26,7 +26,6 @@ in progress<br>
 
 [Part One Standard Normal ](https://www.youtube.com/watch?v=mtbJbDwqWLE&t=294s)
 [Part Two ](https://www.youtube.com/watch?v=2tuBREK_mgE)
-
 <br>
 
 [Standardization vs Normalization Clearly Explained!](https://www.youtube.com/watch?v=sxEqtjLC0aM)

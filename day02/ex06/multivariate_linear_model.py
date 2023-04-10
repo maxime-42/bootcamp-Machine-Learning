@@ -47,7 +47,7 @@ def Multivariate(feature:str, target:str,   color:list = [], alpha=0.001, max_it
     y = np.array(data["Sell_price"]).reshape(-1, 1)
     theta = np.array([[3], [2], [4], [5]])
     linear_re = MyLR(theta, alpha, max_iter)
-    print(check_x_and_theta(x, theta))
+    # print(check_x_and_theta(x, theta))
 
     linear_re.fit_(x, y)
     y_hat = linear_re.predict_(x)
