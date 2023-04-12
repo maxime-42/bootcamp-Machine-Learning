@@ -22,8 +22,7 @@ def gradient(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
 
     if check_x_and_theta(x, theta) is False:
         return None
-    y_hat = predict_(x, theta)
-    
-    m = len(x)
-    x = add_intercept(x)
-    return x.T.dot(y_hat - y) * 1/m
+    m = x.shape[0]
+    xp = np.hstack((np.ones((m, 1)), x))
+    grad = xp.T @ (xp @ theta - y)
+    return grad / m

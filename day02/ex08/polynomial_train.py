@@ -2,100 +2,57 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-PACE = 0.1
-
 from day02.ex05.mylinearregression import MyLinearRegression as MyLR
 
 from day02.ex07.polynomial_model import add_polynomial_features
 
-
-def score(scor_plot, power:int, linear_r:MyLR, x:np.ndarray, y:np.ndarray):
-    y_hat = linear_r.predict_(x)
-    mse:float = linear_r.mse_(y, y_hat)
-    print(f"POWER: {power}; {mse = }")
-    print(f"Thetas:\n{linear_r.thetas}")
-    scor_plot.bar(power,mse)
-
-def model(model_plot, power:int, linear_r:MyLR, y:np.ndarray):
     
-    continuous_x =  np.arange(1, 7 + PACE, PACE).reshape(-1, 1)
-    x = add_polynomial_features(continuous_x, power)
-    y_hat = linear_r.predict_(x)
-    # print(y_hat)
-
-    model_plot.plot(continuous_x, y_hat, label="$%d_{th} curve$" %power)
-
-
 def main():
     data = pd.read_csv("are_blue_pills_magics.csv")
     x = np.array(data["Micrograms"])
-    y = np.array(data["Score"])
+    y = np.array(data["Score"]).reshape(-1, 1)
 
-    params1 = {
-        'theta' :np.array([[-20],[ 160]]).reshape(-1,1),
-        'max_iter': 100000,
-        'alpha': 1e-2,
-    }
-    params2 = {
-        'theta' :np.array([[-20],[ 160],[ -80]]).reshape(-1,1),
-        'max_iter': 100000,
-        'alpha': 1e-3,
-    }
-    params3 = {
-        'theta' :np.array([[-20],[ 160],[ -80],[ 10]]).reshape(-1,1),
-        'max_iter': 100000,
-        'alpha': 1e-5,
-    }
-    params4 = {
-        'theta' :np.array([[-20],[ 160],[ -80],[ 10],[ -1]]).reshape(-1,1),
-        'max_iter': 1000000,
-        'alpha': 1e-7,
-    }
+    theta1 = np.array([-20., 160.]).reshape(-1, 1)
+    theta2 = np.array([-20., 160., -80.]).reshape(-1, 1)
+    theta3 = np.array([-20., 160., -80., 10.]).reshape(-1, 1)
+    theta4 = np.array([-20., 160., -80., 10., -1.]).reshape(-1, 1)
+    theta5 = np.array([1140., -1850., 1110., -305., 40., -2.]).reshape(-1, 1)
+    theta6 = np.array([9110., -18015., 13400., -4935., 966., -96.4, 3.86]).reshape(-1, 1)
 
-    params5 = {
-        'theta': np.array([[1140],[ -1850],[ 1110],[ -305],[ 40],[ -2]]).reshape(-1,1), 
-        'max_iter': 1000000,
-        'alpha': 1e-10,
-    }
+    #six separate Linear Regression model
+    model1 = MyLR(theta1, alpha=1e-3, max_iter=1000000)
+    model2 = MyLR(theta2, alpha=1e-3, max_iter=1000000)
+    model3 = MyLR(theta3, alpha=1e-5, max_iter=5000000)
+    model4 = MyLR(theta4, alpha=1e-6, max_iter=1000000)
+    model5 = MyLR(theta5, alpha=1e-8, max_iter=1000000)
+    model6 = MyLR(theta6, alpha=1e-9, max_iter=5000000)
+    
+    #Trains six separate Linear Regression models with polynomial hypothesis
+    plt.figure(figsize=(13, 8))
+    plt.scatter(x, y, label='raw', c='black')
+    plt.title("Train Polynomial Models")
+    plt.xlabel("Micrograms")
+    plt.ylabel("Score")
+    plt.grid()
 
-    params6 = {
-        'theta' : np.array([[9110],[ -18015],[ 13400],[ -4935],[ 966],[ -96.4],[ 3.86]]).reshape(-1,1),
-        'max_iter': 1000000,
-        'alpha': 1e-10,
-    }
-
-    score_ax = plt.subplot()
-    score_ax.set_title("MSE in function of polynomial's degree")
-    score_ax.set_xlabel("x degree")
-    score_ax.set_ylabel("MSE")
-    score_ax.grid()
-
-    model_ax = plt.subplot()
-    model_ax.set_title("Score depending on taken blue pills (Micrograms)")
-    model_ax.set_xlabel("Micrograms")
-    model_ax.set_ylabel("Score")
-
-    model_ax.plot(x, y, "o", label="$S_{true}$")
-
-    # print(x)
-    for i, param in enumerate([params1, params2, params3, params4, params5,params6 ] ,start=1):
-        new_x = add_polynomial_features(x, i)
-        print(f"Training #{i} model...")
-
-        # print(new_x)
-        # print(param)
-        linear_r = MyLR(param['theta'], alpha=param['alpha'], max_iter=param['max_iter'])
-        # print(linear_r.predict_(new_x))
-        # print(f"Training #{i} model...")
-        linear_r.fit_(new_x, y)
-        # score(score_ax, i, linear_r, new_x, y)
-        print(linear_r.thetas)
-
-        # model(model_ax, i, linear_r, y)
-
-    score_ax.legend()
-    model_ax.legend()
+    x_fit = np.linspace(1, 7, 100)
+    mse_y = np.zeros(6)
+    
+    #Plot all separate Linear Regression models
+    for i, model in enumerate([model1, model2, model3, model4, model5, model6] , start=1):
+        xp = add_polynomial_features(x, i)
+        model.fit_(xp, y)
+        print(f"Training model {i}...")
+        y_hat = model.predict_(add_polynomial_features(x_fit, i))
+        plt.plot(x_fit,  y_hat, label=f"Pred model {i}" )
+        mse_y[i - 1] = model.loss_(y, model.predict_(xp))
+        print(f"MSE : {mse_y[i - 1]}\n")
+    print("MSE :\n", mse_y.reshape(-1, 1))  
+    xx = np.array(["pred 1", "pred 2", "pred 3", "pred 4", "pred 5", "pred 6"])
+    plt.legend()
+    plt.figure()
+    plt.bar(xx, mse_y)
+    plt.grid()
     plt.show()
-
 if __name__ == "__main__":
     main()
