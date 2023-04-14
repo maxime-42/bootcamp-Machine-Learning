@@ -18,20 +18,13 @@ def data_spliter(x, y, proportion):
     Raises:
         This function should not raise any Exception.
     """
-    # split_index = x[:int(proportion * len(x)) ]
-    # random.shuffle(x)
-    # random.shuffle(y)
+    # Determine the number of training samples based on the given proportion
+    # data = np.concatenate(x, y, axis=0)
+    data = np.random.shuffle(np.concatenate(x, y, axis=1))
+    index = int(proportion * x.shape[0])
 
-    split_pointx = int(proportion *len(x))
-    split_pointy = int(proportion * len(y))
+    indices = np.random(x.shape[0])
 
-    train_x, test_x = np.split(x, [split_pointx])
-    train_y, test_y = np.split(y, [split_pointy])
-
-    # train_set.append(x[:int(proportion * len(x))])
-    # train_set.append(y[:int(proportion * len(y))])
-
-    print(f"train set {train_y} {train_x}")
-    # print({train_x}")
-
-    # print((x[:int(proportion * len(x))], y[:int(proportion * len(y))] ))
+    x_train, y_train = data[:index, :], data[:index, :]
+    x_test, y_test = data[index:, :-1], data[index:, -1:]
+    return (x_train, x_test, y_train, y_test)
