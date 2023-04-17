@@ -23,6 +23,6 @@ def gradient(x:np.ndarray, y:np.ndarray, theta:np.ndarray):
     if check_x_and_theta(x, theta) is False:
         return None
     m = x.shape[0]
-    xp = np.hstack((np.ones((m, 1)), x))
-    grad = xp.T @ (xp @ theta - y)
+    xp =  np.hstack((np.ones((m, 1)), x))
+    grad =  xp.T @ (xp @ theta - y)
     return grad / m
