@@ -30,3 +30,9 @@ in progress<br>
 
 [Standardization vs Normalization Clearly Explained!](https://www.youtube.com/watch?v=sxEqtjLC0aM)
 
+<br>
+
+## Day02
+
+[data splinter ](https://realpython.com/train-test-split-python-data/)
+<br>

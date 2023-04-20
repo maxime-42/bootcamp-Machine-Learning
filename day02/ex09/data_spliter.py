@@ -18,13 +18,17 @@ def data_spliter(x, y, proportion):
     Raises:
         This function should not raise any Exception.
     """
-    # Determine the number of training samples based on the given proportion
-    # data = np.concatenate(x, y, axis=0)
-    data = np.random.shuffle(np.concatenate(x, y, axis=1))
+    data = np.hstack((x, y))
+
+    np.random.shuffle(data)
+    # print(data)
     index = int(proportion * x.shape[0])
+	#slicing:
+	#  :-1 means to select all columns except the last one, 
+	#  -1: means to select only the last column.
 
-    indices = np.random(x.shape[0])
-
-    x_train, y_train = data[:index, :], data[:index, :]
+	#les `index` premiere element
+    x_train, y_train = data[:index, :-1], data[:index, -1:]
+    #à partir de 'index' element 
     x_test, y_test = data[index:, :-1], data[index:, -1:]
     return (x_train, x_test, y_train, y_test)

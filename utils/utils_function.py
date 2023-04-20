@@ -29,3 +29,30 @@ def add_intercept(x=np.ndarray):
     if len(x.shape) == 1:
         x = x.reshape(-1, 1)
     return np.column_stack((np.ones(len(x)), x ))
+
+class Standardization():
+    def __init__(self):
+        """
+            Standardization is commonly used when working with features that have different scales or units. 
+            This is because many machine learning algorithms assume that all features are on a similar scale, 
+            and may not perform well if this assumption is not met.
+            Standardization involves subtracting the mean value of each feature and then dividing by its standard deviation. 
+            This process transforms the features to have a mean of 0 and a standard deviation of 1.
+            Standardization can be useful in situations where some features have values that are much larger or smaller than others, 
+            or when the range of values for different features varies widely. 
+            It can also help to make the model more interpretable, 
+            since the coefficients obtained from the model will be directly comparable across features.
+        """
+        pass
+    
+    def fit(self, feature):
+        self.mean_ = np.mean(feature, axis=0)
+        self.std_ = np.std(feature, axis=0)
+        
+    def transform(self, feature):
+   
+        std_feature = np.copy(feature)
+        std_feature -= self.mean_
+        std_feature /= self.std_
+        return std_feature
+
