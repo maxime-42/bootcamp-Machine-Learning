@@ -59,60 +59,55 @@ def draw(ax,  x, true_value, pred, zipecode:int, biometric_info):
     ax.legend()
     ax.grid()
 
-
-feature = pd.read_csv('solar_system_census.csv', index_col=0).to_numpy()
-label = pd.read_csv('solar_system_census_planets.csv', index_col=0).to_numpy()
-
-# label = label.to_numpy()
-# feature = feature.to_numpy()
-
-#check the valide argument  
-#1. Take an argument: –zipcode=x with x being 0, 1, 2 or 3. 
-zipcode = check_input()
-
-#take Zipcode and generate a new array 'label_binary' composed of 0 or 1
-label_binary = binarize(label, zipcode, lambda a, b: np.where(a == b))
-
-#2. Split the dataset 
-print(f"label = {label.shape}")
-print(f"feature = {feature.shape}")
-
-# print(f"x_ = {feature.value.shape}")
+if __name__ == "__main__":
 
 
-x_train, x_test, y_train, y_test = data_spliter(feature, label_binary, 0.2)
+    feature = pd.read_csv('solar_system_census.csv', index_col=0).to_numpy()
+    label = pd.read_csv('solar_system_census_planets.csv', index_col=0).to_numpy()
+
+    #check the valide argument  
+    #1. Take an argument: –zipcode=x with x being 0, 1, 2 or 3. 
+    zipcode = check_input()
 
 
-#3 normalization on your datase beacause it from difference bases
-feature_standardizer = Standardization()
-feature_standardizer.fit(x_train)
-x_train_std = feature_standardizer.transform(x_train)
-x_test_std = feature_standardizer.transform(x_test)
-
-#4.train a logistic model to predict if a citizen comes from your favorite planet or not, using your brand new label.
-theta = np.random.rand(feature.shape[1] + 1, 1)
-model = Mlr(theta, 1e-2, max_iter=10000)
-model.fit_(x_train_std, y_train)
-pred = model.predict_(x_test_std)
-pred_binary = binarize(pred, 0.5, lambda a, b: np.where(a >= b))
+    #take Zipcode and generate a new array 'label_binary' composed of 0 or 1
+    label_binary = binarize(label, zipcode, lambda a, b: np.where(a == b))
 
 
-#Calculate and display the fraction of correct predictions over the total number of predictions based on the test set
-accuracy = np.sum(pred_binary == y_test)/len(pred_binary)
-print(f"Accuracy : {accuracy}")
+    #2. Split the dataset 
+
+    x_train, x_test, y_train, y_test = data_spliter(feature, label_binary, 0.2)
 
 
-#6. Plot 3 scatter plots (one for each pair of citizen features) with the dataset and the
+    #3 normalization on your datase beacause it from difference bases
+    feature_standardizer = Standardization()
+    feature_standardizer.fit(x_train)
+    x_train_std = feature_standardizer.transform(x_train)
+    x_test_std = feature_standardizer.transform(x_test)
 
-fig, (ax1, ax2, ax3) = plt.subplots(1, 3,  figsize=(20, 6))
-planete = ["Venus", "Earth", "Mars", "Asteroids’ Belt colonies"]
-plt.suptitle("Planete " + planete[zipcode], fontsize=38, y=1)
+    #4.train a logistic model to predict if a citizen comes from your favorite planet or not, using your brand new label.
+    theta = np.random.rand(feature.shape[1] + 1, 1)
+    model = Mlr(theta, 1e-2, max_iter=10000)
+    model.fit_(x_train_std, y_train)
+    pred = model.predict_(x_test_std)
+    pred_binary = binarize(pred, 0.5, lambda a, b: np.where(a >= b))
 
 
-draw(ax1, x_test[:, 0], y_test, pred_binary, zipcode, "Height")
-draw(ax2, x_test[:, 1], y_test, pred_binary, zipcode, "Weight")
-draw(ax3, x_test[:, 2], y_test, pred_binary, zipcode, "Bones Density")
+    #Calculate and display the fraction of correct predictions over the total number of predictions based on the test set
+    accuracy = np.sum(pred_binary == y_test)/len(pred_binary)
+    print(f"Accuracy : {accuracy}")
 
 
+    #6. Plot 3 scatter plots (one for each pair of citizen features) with the dataset and the
 
-plt.show()
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3,  figsize=(20, 6))
+    planete = ["Venus", "Earth", "Mars", "Asteroids’ Belt colonies"]
+    plt.suptitle("Planete " + planete[zipcode], fontsize=38, y=1)
+
+
+    draw(ax1, x_test[:, 0], y_test, pred_binary, zipcode, "Height")
+    draw(ax2, x_test[:, 1], y_test, pred_binary, zipcode, "Weight")
+    draw(ax3, x_test[:, 2], y_test, pred_binary, zipcode, "Bones Density")
+
+
+    plt.show()
