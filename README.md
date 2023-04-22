@@ -32,7 +32,7 @@ in progress<br>
 
 <br>
 
-## Day02
+# Day02
 
 [data splinter ](https://realpython.com/train-test-split-python-data/)
 <br>
