@@ -20,7 +20,7 @@ in progress<br>
 [SKLEARNLinearRegression ](https://www.youtube.com/watch?v=P6kSc3qVph0&t=605s)
 <br>
 
-### Ex05 and Ex6
+### Ex05 and Ex06
 [intro to Standardization vs Normalization](https://www.youtube.com/watch?v=mnKm3YP56PY&t=301s)
 <br>
 
@@ -36,3 +36,9 @@ in progress<br>
 
 [data splinter ](https://realpython.com/train-test-split-python-data/)
 <br>
+
+# Day03
+
+### Ex05 and Ex06
+[Précision, Rappel, F1 score, Accuracy, Matrice de Confusion](https://www.youtube.com/watch?v=ngvEcjZhSMY)
+
