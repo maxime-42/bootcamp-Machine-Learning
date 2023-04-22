@@ -43,3 +43,5 @@ in progress<br>
 [Précision, Rappel, F1 score, Accuracy, Matrice de Confusion](https://www.youtube.com/watch?v=ngvEcjZhSMY)
 <br>
 [Confusion Matrix representation](https://www.sciencedirect.com/topics/engineering/confusion-matrix#:~:text=A%20confusion%20matrix%20represents%20the,by%20model%20as%20other%20class.)
+<br>
+[Matrix confusion table](https://www.researchgate.net/figure/Confusion-matrices-a-Binary-classification-confusion-matrix-b-Multiclass_fig1_353497712)
