@@ -1,4 +1,21 @@
 import numpy as np
+import sys
+
+def check_arg(x, power):
+    """
+    Checking type, Checking type of power
+    Checking data type, 'i': signed integer, 'u': unsigned integer,'f': float
+    """
+    if not isinstance(x, np.ndarray):
+        print("Unexpected type", file=sys.stderr)
+        sys.exit(1)
+    if x.dtype.kind not in ["i", "u", "f"]:
+        print("Unexpected data type", file=sys.stderr)
+        sys.exit(1)
+
+    if (not isinstance(power, int)) or (power <= 0):
+        print("Unexpected value for power", file=sys.stderr)
+        sys.exit(1)
 
 def add_polynomial_features(x, power):
     """
@@ -12,8 +29,9 @@ def add_polynomial_features(x, power):
     Raises:
         This function should not raise any Exception.
     """
-
-
+    if x.ndim == 1:
+        x = np.expand_dims(x, axis=1)
+    check_arg(x, power)
     mod = x.shape[1]
     p = 2
     for i in range(power+2) :
@@ -25,9 +43,3 @@ def add_polynomial_features(x, power):
        if p > power:
             return x
     return x
-
-print("exemple 1:")
-x = np.arange(1,11).reshape(5, 2)
-print(add_polynomial_features(x, 4))
-# print("exemple 2:")
-# print(add_polynomial_features(x, 4))

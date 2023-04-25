@@ -51,8 +51,8 @@ def simple_gradient(x, y, theta):
     xp = np.column_stack((x_0, x ))
     
     m = len(x)
-    print(xp.transpose().shape)
-    print( (y_hat - y).shape)
+    # print(xp.transpose().shape)
+    # print( (y_hat - y).shape)
     r =  xp.transpose().dot((y_hat - y))
     return (1/m) * r
 
