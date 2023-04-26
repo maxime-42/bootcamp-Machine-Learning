@@ -45,3 +45,7 @@ in progress<br>
 [Confusion Matrix representation](https://www.sciencedirect.com/topics/engineering/confusion-matrix#:~:text=A%20confusion%20matrix%20represents%20the,by%20model%20as%20other%20class.)
 <br>
 [Matrix confusion table](https://www.researchgate.net/figure/Confusion-matrices-a-Binary-classification-confusion-matrix-b-Multiclass_fig1_353497712)
+<br>
+
+# Day 04
+[Regulaziation in Machine Learning | L1 and L2 Regularization](https://www.youtube.com/watch?v=OH4_Xsk8nfc)
