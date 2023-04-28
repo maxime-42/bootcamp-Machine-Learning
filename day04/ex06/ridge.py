@@ -12,7 +12,7 @@ class MyRidge(MyLinearRegression):
     """
     
     def __init__(self, thetas, alpha=0.001, max_iter=1000, lambda_=0.5):
-        super().__init__(self, self.theta, self.alpha, self.max_iter)
+        super().__init__(thetas, alpha, max_iter)
         self.alpha = alpha
         self.max_iter = max_iter
         self.thetas = thetas
@@ -46,6 +46,9 @@ class MyRidge(MyLinearRegression):
         
         def get_params_(self):
             return self.__dict__
+
+        # def predict(self, x):
+        #     return self.predict_(x)
 
         def set_params_(self, new_val):
             """ 

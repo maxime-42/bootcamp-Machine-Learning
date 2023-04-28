@@ -17,29 +17,19 @@ def check_arg(x, power):
         print("Unexpected value for power", file=sys.stderr)
         sys.exit(1)
 
+
 def add_polynomial_features(x, power):
-    """
-    Add polynomial features to matrix x by raising its columns to every power in the range of 1 up to the power given in argument.
+    """Add polynomial features to vector x by raising its values up to the power given in
+        argument.
     Args:
-        x: has to be an numpy.ndarray, a matrix of shape m * n.
-        power: has to be an int, the power up to which the columns of matrix x are going to be raised.
+        x: has to be an numpy.ndarray, a vector of dimension m * 1.
+        power: has to be an int, the power up to which the components of vector x are going to
+            be raised.
     Returns:
-        The matrix of polynomial features as a numpy.ndarray, of shape m * (np), containg the polynomial feature values for all training examples.
+        The matrix of polynomial features as a numpy.ndarray, of dimension m * n, containg he
+            polynomial feature values for all training examples.
         None if x is an empty numpy.ndarray.
     Raises:
         This function should not raise any Exception.
     """
-    if x.ndim == 1:
-        x = np.expand_dims(x, axis=1)
-    check_arg(x, power)
-    mod = x.shape[1]
-    p = 2
-    for i in range(power+2) :
-       index = i % mod
-       xn = x[:, index ] ** p
-       x = np.hstack((x, xn.reshape(-1, 1)))
-       if index == mod - 1:
-           p += 1
-       if p > power:
-            return x
-    return x
+    return np.concatenate([x ** (i + 1) for i in range(power)], axis=1)
