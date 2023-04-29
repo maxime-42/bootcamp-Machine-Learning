@@ -76,3 +76,9 @@ class Minmax():
     def unapply(self, X):
         e = 1e-20
         return (X * (self.max - self.min + e)) + self.min
+    
+def minimize(x):
+    e = 1e-20
+    min = x.min(axis=0)
+    max = x.max(axis=0)
+    return (x - min) / (max - min + e)

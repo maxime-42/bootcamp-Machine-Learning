@@ -17,6 +17,7 @@ def logistic_predict_(x, theta):
     """
 
     if check_x_and_theta(x, theta) is False:
+        print("le type est : ", type(theta))
         return None
     xp = predict_(x, theta)
     return np.divide(1., 1 + np.exp(-xp))
