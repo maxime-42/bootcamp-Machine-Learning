@@ -19,8 +19,6 @@ def load_model(filename:str):
     return data
 
 
-
-
 try :
 
     feature = pd.read_csv('solar_system_census.csv', index_col=0).to_numpy()
@@ -31,13 +29,12 @@ else :
     x = add_polynomial_features(minimize(feature), 3)
     x_train, x_test, y_train, y_test = data_spliter(x, label, 0.2)
     f1s = []
+    theta = np.random.rand(x.shape[1] + 1, 1)
+
     for i, lambda_ in enumerate([0., 0.1, 0.3, 0.5, 0.7, 1.], start=1):
         # model = one_vs_all(lambda_, label, x, i)
         filename = f"model_p{i}_l{lambda_}.pkl"
-        # filename = f"model_p{i}_l{lambda_}.pkl"
-        # print(f"{filename=}")
         model = load_model(filename)
-        # model.fit_(x_train,  y_train)
-        pred = model.predict_(x_test)
-        print(f"Lambda {lambda_} f1:  { f1_score_(x_train, pred)}")
-
+        # f1(y_hat, y, label)
+        pred = model.predict_(x_train)
+        print(f"Lambda {lambda_} f1:  { f1_score_(y_train, pred)}")

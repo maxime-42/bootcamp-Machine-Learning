@@ -15,10 +15,11 @@ import sys
 from day03.ex08.other_metrics import f1_score_
 
 
+
 def get_bin_Y(Y, feature):
     Y_ = Y.copy()
-    Y_[np.where(Y == feature)] = 1.
-    Y_[np.where(Y != feature)] = 0.
+    Y_[(Y == feature)] = 1.
+    Y_[(Y != feature)] = 0.
     return Y_
 
 def model_save(model, poly, lambd):
@@ -37,7 +38,9 @@ def one_vs_all(lamda_, y, x, i):
     y_train_binary = get_bin_Y(y_train, y)
     model.fit_(x_train,  y_train_binary)
     pred = model.predict_(x_test)
+    # print(f"{pred =} \n\n")
     print(f"Lambda {lambda_} f1:  { f1_score_(x_test, y_test)}")
+
     return model
 
 try :
@@ -50,5 +53,4 @@ else :
     x = add_polynomial_features(minimize(feature), 3)
     for i, lambda_ in enumerate([0., 0.1, 0.3, 0.5, 0.7, 1.], start=1):
         model = one_vs_all(lambda_, label, x, i)
-        filename = f"model_p{i}_l{lambda_}.pkl"
         model_save(model, i, lambda_)
