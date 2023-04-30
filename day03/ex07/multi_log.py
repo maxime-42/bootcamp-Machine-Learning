@@ -13,6 +13,7 @@ from mono_log import  binarize, draw
 feature = pd.read_csv('solar_system_census.csv', index_col=0).to_numpy()
 label = pd.read_csv('solar_system_census_planets.csv', index_col=0).to_numpy()
 
+#set all label
 label_b0 = binarize(label, 0, lambda a, b: np.where(a == b))
 label_b1 = binarize(label, 1, lambda a, b: np.where(a == b))
 label_b2 = binarize(label, 2, lambda a, b: np.where(a == b))
@@ -24,27 +25,26 @@ feature_standardizer.fit(x_train)
 x_train_std = feature_standardizer.transform(x_train)
 x_test_std = feature_standardizer.transform(x_test)
 
-#train model
+#train model 0
 theta = np.random.rand(feature.shape[1] + 1, 1)
 model_0 = Mlr(theta, 1e-3, 80000)
-model_0.fit_(x_train_std, binarize(y_train, 0, lambda a, b: np.where(a == b)) )
+model_0.fit_(x_train_std, label_b0 )
 pred_0 = model_0.predict_(x_test_std)
-pred_0_b = binarize(pred_0, 0.5, lambda a, b: np.where(a >= b))
 
 
-
+#train model 1
 model_1 = Mlr(theta, 1e-3, 8000)
-model_1.fit_(x_train_std, binarize(y_train, 1, lambda a, b: np.where(a == b)) )
+model_1.fit_(x_train_std, label_b1 )
 pred_1 = model_1.predict_(x_test_std)
 
-
+#train model 2
 model_2 = Mlr(theta, 1e-3, 8000)
-model_2.fit_(x_train_std, binarize(y_train, 2, lambda a, b: np.where(a == b)) )
+model_2.fit_(x_train_std, label_b2 )
 pred_2 = model_2.predict_(x_test_std)
 
-
+#train model 3
 model_3 = Mlr(theta, 1e-3, 8000)
-model_3.fit_(x_train_std, binarize(y_train, 3, lambda a, b: np.where(a == b)) )
+model_3.fit_(x_train_std, label_b3 )
 pred_3 = model_3.predict_(x_test_std)
 
 preds = np.hstack((pred_0, pred_1, pred_2, pred_3))
